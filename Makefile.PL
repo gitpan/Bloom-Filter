@@ -4,7 +4,11 @@ use ExtUtils::MakeMaker;
 WriteMakefile(
     'NAME'		=> 'Bloom::Filter',
     'VERSION_FROM'	=> 'Filter.pm', # finds $VERSION
-    'PREREQ_PM'		=> {}, # e.g., Module::Name => 1.1
+    'PREREQ_PM'		=> {
+			    Digest::SHA1 => 0.01,
+			    Carp         => 0.01,
+			    Test::More   => 0.01,
+			   },
     ($] >= 5.005 ?    ## Add these new keywords supported since 5.005
       (ABSTRACT_FROM => 'Filter.pm', # retrieve abstract from module
        AUTHOR     => 'A. U. Thor <a.u.thor@a.galaxy.far.far.away>') : ()),

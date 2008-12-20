@@ -1,10 +1,12 @@
 Changes
 Filter.pm
+Filter.pm.maciej
+Filter.pm.kjetil
 Makefile.PL
 MANIFEST
 README
 t/add.t
 t/check.t
 t/defaults.t
-
+t/lots.t
 META.yml                                Module meta-data (added by MakeMaker)
