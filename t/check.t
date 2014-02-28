@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-use Test::More qw/no_plan/;
+use Test::More;
 
 use Bloom::Filter;
 
@@ -18,3 +18,4 @@ ok( $bf->check( "Hansel" ), "Found key 'Hansel' in filter" );
 ok( !$bf->check( "Herman" ), "Did not find key 'Herman'" );
 ok( $bf->check( "Gretel" ), "Found key 'Gretel' in filter" );
 
+done_testing();

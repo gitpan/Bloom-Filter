@@ -1,15 +1,49 @@
+use strict;
+use warnings;
+
 use ExtUtils::MakeMaker;
-# See lib/ExtUtils/MakeMaker.pm for details of how to influence
-# the contents of the Makefile that is written.
-WriteMakefile(
-    'NAME'		=> 'Bloom::Filter',
-    'VERSION_FROM'	=> 'Filter.pm', # finds $VERSION
-    'PREREQ_PM'		=> {
-			    Digest::SHA1 => 0.01,
-			    Carp         => 0.01,
-			    Test::More   => 0.01,
-			   },
-    ($] >= 5.005 ?    ## Add these new keywords supported since 5.005
-      (ABSTRACT_FROM => 'Filter.pm', # retrieve abstract from module
-       AUTHOR     => 'A. U. Thor <a.u.thor@a.galaxy.far.far.away>') : ()),
+
+my %WriteMakefileArgs = (
+    NAME => 'Bloom::Filter',
+    VERSION_FROM => 'lib/Bloom/Filter.pm',
+    MIN_PERL_VERSION => '5.6.0',
+    PREREQ_PM => {
+        'Carp' => 0,
+        'Digest::SHA' => 0,
+        'strict' => 0,
+        'warnings' => 0,
+    },
+    ABSTRACT_FROM => 'lib/Bloom/Filter.pm',
+    AUTHOR => 'Maciej Ceglowski <maciej@ceglowski.com>',
+    LICENSE => 'gpl',
+    META_MERGE => {
+        'meta-spec' => { version => 2 },
+        resources => {
+            repository => {
+                type => 'git',
+                url => 'git://github.com/Xaerxess/Bloom-Filter.git',
+                web => 'https://github.com/Xaerxess/Bloom-Filter',
+            },
+            bugtracker => {
+                web => 'https://rt.cpan.org/Dist/Display.html?Name=Bloom-Filter',
+            },
+        },
+    },
+    test => {
+        TESTS => "t/*.t"
+    },
 );
+
+unless (eval { ExtUtils::MakeMaker->VERSION(6.48) }) {
+    delete $WriteMakefileArgs{MIN_PERL_VERSION};
+}
+
+unless (eval { ExtUtils::MakeMaker->VERSION(6.46) }) {
+    delete $WriteMakefileArgs{META_MERGE};
+}
+
+unless (eval { ExtUtils::MakeMaker->VERSION(6.31) }) {
+    delete $WriteMakefileArgs{LICENSE};
+}
+
+WriteMakefile(%WriteMakefileArgs);
